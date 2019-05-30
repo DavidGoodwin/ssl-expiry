@@ -33,7 +33,6 @@ function _check($host, $port) {
         $starttls = " -starttls {$tls_ports[$port]} ";
     }
     $output = shell_exec("echo | openssl s_client -connect $host:$port -servername $host $starttls 2>/dev/null | openssl x509 -noout -dates");
-    #exec("python ssl_expiry.py -H $host -p $port -n $host", $output, $retval);
     if(preg_match('/notAfter=(.*)$/',$output, $matches)) {
         $date = new DateTime($matches[1]);
         if($date > new DateTime('+1 weeks')) {
