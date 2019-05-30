@@ -24,7 +24,7 @@ function _parse($line) {
 
 /**
  * Check given host/port
- * @return boolean|string true if it expires more than 2 weeks away, otheriwse expiry date.
+ * @return boolean|string true if it expires more than 1 week away, otheriwse expiry date.
  */
 function _check($host, $port) {
     $tls_ports = [25 => 'smtp', '143' => 'imap' ];
@@ -36,7 +36,7 @@ function _check($host, $port) {
     #exec("python ssl_expiry.py -H $host -p $port -n $host", $output, $retval);
     if(preg_match('/notAfter=(.*)$/',$output, $matches)) {
         $date = new DateTime($matches[1]);
-        if($date > new DateTime('+2 weeks')) {
+        if($date > new DateTime('+1 weeks')) {
             return true;
         }
         return $date->format('Y-m-d');
