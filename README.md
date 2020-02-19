@@ -2,6 +2,8 @@
 
 Crude took to check remote ssl certificates.
 
+![PHP Composer](https://github.com/DavidGoodwin/ssl-expiry/workflows/PHP%20Composer/badge.svg)
+
 # Installation
 
 Run via cron (php check.php). If it outputs anything, you probably need to do something.
