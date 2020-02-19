@@ -27,13 +27,19 @@ function _parse(string $line) : array {
  * @return boolean|string true if it expires more than 1 week away, otheriwse expiry date.
  */
 function _check(string $host, string $port) {
-    $tls_ports = [25 => 'smtp', '143' => 'imap' ];
+
+    $tls_ports = ['25' => 'smtp', '143' => 'imap'];
     $starttls = '';
-    if (isset($tls_ports[$port])) {
+
+    if (array_key_exists($port, $tls_ports)) {
         $starttls = " -starttls {$tls_ports[$port]} ";
     }
+
+    /**
+     * @psalm-suppress ForbiddenCode
+     */
     $output = shell_exec("echo | openssl s_client -connect $host:$port -servername $host $starttls 2>/dev/null | openssl x509 -noout -dates");
-    if (preg_match('/notAfter=(.*)$/',$output, $matches)) {
+    if ($output !== null && preg_match('/notAfter=(.*)$/',$output, $matches)) {
         $date = new DateTime($matches[1]);
         if ($date > new DateTime('+1 weeks')) {
             return true;
