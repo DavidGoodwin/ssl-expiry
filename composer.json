@@ -1,0 +1,16 @@
+{
+    "name": "palepurple/ssl-expiry",
+    "description": "Tool to check remote services for SSL certificate expiry",
+    "type": "project",
+    "require-dev": {
+        "vimeo/psalm": "*"
+    },
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "David Goodwin",
+            "email": "david@codepoets.co.uk"
+        }
+    ],
+    "require": {}
+}
