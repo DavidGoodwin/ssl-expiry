@@ -3,7 +3,7 @@
 foreach(file('hosts.conf') as $line) {
     list($host, $port) = _parse($line);
     $ok = _check($host, $port);
-    if($ok !== true) {
+    if ($ok !== true) {
         echo "Warning: $host ($port) expires on $ok\n";
     }
 }
@@ -14,9 +14,9 @@ foreach(file('hosts.conf') as $line) {
  * @param string line like 'hostname' or 'hostname:port'
  * @return array ($host, $port)
  */
-function _parse($line) {
+function _parse(string $line) : array {
     $line = trim($line);
-    if(preg_match('/(.*):(\d+)/', $line, $matches)) {
+    if (preg_match('/(.*):(\d+)/', $line, $matches)) {
         return array($matches[1], $matches[2]);
     }
     return array($line, '443');
@@ -26,18 +26,19 @@ function _parse($line) {
  * Check given host/port
  * @return boolean|string true if it expires more than 1 week away, otheriwse expiry date.
  */
-function _check($host, $port) {
+function _check(string $host, string $port) {
     $tls_ports = [25 => 'smtp', '143' => 'imap' ];
     $starttls = '';
-    if(isset($tls_ports[$port])) {
+    if (isset($tls_ports[$port])) {
         $starttls = " -starttls {$tls_ports[$port]} ";
     }
     $output = shell_exec("echo | openssl s_client -connect $host:$port -servername $host $starttls 2>/dev/null | openssl x509 -noout -dates");
-    if(preg_match('/notAfter=(.*)$/',$output, $matches)) {
+    if (preg_match('/notAfter=(.*)$/',$output, $matches)) {
         $date = new DateTime($matches[1]);
-        if($date > new DateTime('+1 weeks')) {
+        if ($date > new DateTime('+1 weeks')) {
             return true;
         }
         return $date->format('Y-m-d');
     }
+    return "Weird date line : $output ";
 }
