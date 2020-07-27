@@ -28,7 +28,7 @@ function _parse(string $line) : array {
  */
 function _check(string $host, string $port) {
 
-    $tls_ports = ['25' => 'smtp', '143' => 'imap'];
+    $tls_ports = ['25' => 'smtp', '143' => 'imap', '21' => 'ftp'];
     $starttls = '';
 
     if (array_key_exists($port, $tls_ports)) {
