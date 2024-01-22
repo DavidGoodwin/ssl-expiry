@@ -3,7 +3,7 @@
     "description": "Tool to check remote services for SSL certificate expiry",
     "type": "project",
     "require-dev": {
-        "vimeo/psalm": "*"
+        "psalm/phar": "*"
     },
     "license": "BSD",
     "authors": [
