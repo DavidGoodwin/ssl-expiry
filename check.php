@@ -1,7 +1,11 @@
 <?php
 
-foreach(file('hosts.conf') as $line) {
+foreach(file(__DIR__ . '/hosts.conf') as $line) {
+    if (preg_match('/^#/', $line)) {
+        continue;
+    }
     list($host, $port) = _parse($line);
+    //echo "Chekcing $host\n";
     $ok = _check($host, $port);
     if ($ok !== true) {
         echo "Warning: $host ($port) expires on $ok\n";
