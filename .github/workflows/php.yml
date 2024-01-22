@@ -10,6 +10,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        tools: composer
+        extensions: zip, mbstring, intl, openssl
+
+
     - name: Validate composer.json and composer.lock
       run: composer validate
 
@@ -20,4 +28,4 @@ jobs:
     # Docs: https://getcomposer.org/doc/articles/scripts.md
 
     - name: Run test suite
-      run: vendor/bin/psalm --threads=1 
+      run: vendor/bin/psalm.phar 
