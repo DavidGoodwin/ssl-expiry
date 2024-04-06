@@ -44,7 +44,7 @@ function _check(string $host, string $port) {
     /**
      * @psalm-suppress ForbiddenCode
      */
-    $output = shell_exec("echo | openssl s_client -connect $host:$port -servername $host $starttls 2>/dev/null | openssl x509 -noout -dates");
+    $output = shell_exec("echo | openssl s_client -connect $host:$port -servername $host $starttls 2>/dev/null | openssl x509 -in /dev/stdin -noout -dates");
     if ($output !== null && preg_match('/notAfter=(.*)$/',$output, $matches)) {
         $date = new DateTime($matches[1]);
         if ($date > new DateTime('+1 weeks')) {
