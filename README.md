@@ -21,3 +21,13 @@ e.g.
 myserver.com
 mail.example.com:25
 ```
+
+If you need to check a different underlying address (e.g. cloudflare is proxying/hiding the actual server, and you need to check the server has a valid certificate) then try : 
+
+
+e.g.
+
+```
+myserver.com#1.2.3.4
+mail.example.com:25#4.5.6.7
+```
