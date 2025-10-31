@@ -1,7 +1,8 @@
 <?php
 
 foreach(file(__DIR__ . '/hosts.conf') as $line) {
-    if (preg_match('/^#/', $line)) {
+    $line = trim($line);
+    if (empty($line) || preg_match('/^#/', $line)) {
         continue;
     }
     $details = _parse($line);
@@ -19,7 +20,6 @@ foreach(file(__DIR__ . '/hosts.conf') as $line) {
  * @return array{host_name: string, host_address: string, port: int}
  */
 function _parse(string $line) : array {
-    $line = trim($line);
 
     $host_address = null; // underlying ip address if we need to poke one (e.g. cloudflare is infront of a hostname)
     $port = 443;
