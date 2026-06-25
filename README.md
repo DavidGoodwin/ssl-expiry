@@ -2,7 +2,6 @@
 
 Crude took to check remote ssl certificates (mostly warns when they expire soon)
 
-
 ![PHP Composer](https://github.com/DavidGoodwin/ssl-expiry/workflows/PHP%20Composer/badge.svg)
 
 # Installation
@@ -31,8 +30,6 @@ e.g. connect to the server with IP 1.2.3.4 and look for an ssl certificate for t
 ```
 myserver.com#1.2.3.4
 ```
-
-
 
 e.g. connect to this SMTP server (port 25) on IP 4.5.6.7 looking for the certificate mail.example.com ...
 

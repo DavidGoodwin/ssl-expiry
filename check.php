@@ -114,6 +114,7 @@ function _open(string $host_name, string $host_address, int $port, bool $verify,
         return true;
     });
 
+    // echo | openssl s_client -connect $host_address:$port -servername $host_name $starttls 2>/dev/null | openssl x509 -in /dev/stdin -noout -dates
     try {
         $client = stream_socket_client(
             "{$scheme}://{$host_address}:{$port}",
